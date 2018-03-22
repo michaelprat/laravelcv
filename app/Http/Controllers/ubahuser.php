@@ -7,6 +7,7 @@ use Sentinel;
 use Session;
 use App\User;
 use App\cv;
+use DB;
 class ubahuser extends Controller
 {
     public function __construct()
@@ -92,6 +93,9 @@ class ubahuser extends Controller
 
         ]);
         User::find($id)->update($request->all());
+        $updateus=User::find($id);
+        $updateus->alamat=$request->alamat;
+        $updateus->save();
         return redirect()->route('listuser.index');
 
     }
@@ -104,8 +108,9 @@ class ubahuser extends Controller
      */
     public function destroy($id)
     {
-        User::destroy($id);
-        $datacv=cv::select('id')->where('id_user', $id)->value('id');
+        User::destroy($id);//orm (objec relation model)
+        $datacv=cv::select('id')->where('id_user', $id)->value('id'); //query builder
+        DB::table('activations')->where("user_id",$id)->delete();
         cv::destroy($datacv);
         return redirect()->route("listuser.index");
     }

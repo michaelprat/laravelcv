@@ -61,6 +61,29 @@ class detailuser extends Controller
         
     }
 
+
+    public function update(Request $request, $id)
+    {
+        $this->validate($request,
+        [
+               
+              'jenis_kelamin'=>'required|max:255|min:1',
+              'no_ktp'=>'required|numeric|min:1',
+              'alamat'=>'required|min:1',
+              'no_telpon'=>'required|min:1',
+              'Pendidikan'=>'required|min:1'
+             
+
+        ]);
+        User::find($id)->update($request->all());
+        $updateus=User::find($id);
+        $updateus->alamat=$request->alamat;
+        $updateus->save();
+        return redirect()->route('home.index');
+
+    }
+
+
     
   
 
@@ -72,7 +95,8 @@ class detailuser extends Controller
      */
     public function edit($id)
     {
-        
+        $find=User::find($id);
+        return view('Halamanedituser')->with('data',$find);
     }
 
     /**
@@ -82,16 +106,7 @@ class detailuser extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+   
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
 
 }

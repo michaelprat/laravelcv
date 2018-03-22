@@ -74,15 +74,8 @@ class cvuser extends Controller
         ]);
         $masuk=0;
         $check=cv::all();
-        foreach($check as $tampung)
-        {
-             if(Sentinel::getUser()->id==$tampung->id_user)
-             {
-                 $masuk=1;
-             }
-        }
-        if($masuk==0)
-        {
+       $idfile=0;
+      
         $cv=new cv($request->input());
         if($file=$request->hasFile('file'))
         {
@@ -94,11 +87,35 @@ class cvuser extends Controller
             $cv->detail=$path;
             $cv->status="unread";
             $cv->id_user=Sentinel::getUser()->id;
+            foreach($check as $tampung)
+            {
+                 if(Sentinel::getUser()->id==$tampung->id_user)
+                 {
+                     $masuk=1;
+                     $idfile=$tampung->id_user;
+                 }
+            }
+            if($masuk==1)
+            {
+             $key = cv::select('id')->where('id_user',$idfile)->value('id');
+              $filelama=cv::find($key);
+              $lokasi=$filelama->detail;
+              $filelama->nama=$fileName;
+               $filelama->detail=$path;
+               $filelama->status="unread";
+                $filelama->id_user=Sentinel::getUser()->id;
+              unlink($lokasi);
+              $filelama->update();
+              return redirect()->route('home.index');
+            }
+            else{
+            $cv->save();    
+            return redirect()->route('home.index');
+            }
         }
    
-        $cv->save();
-        return redirect()->route('home.index');
-         }
+       
+       
          else
          {
             return redirect()->back();

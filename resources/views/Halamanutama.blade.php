@@ -231,7 +231,7 @@
                                     <a href="#" class="list-group-item">
                                      Status Cv
                                      <?php $valid = 0; ?>
-                                     
+                                  
                                      <span class="pull-right text-muted small">
                                          @foreach($cv as $tampil)
                                            @if($tampil->id_user==Sentinel::getUser()->id)
@@ -242,23 +242,27 @@
                                          @endforeach
                                       
                                       @if($valid==0)
-                                      
+
                                          Anda belum memasukan cv
                                       
-                                      @endif
-                                      
-                                       
+                                      @endif 
                                          
                                 </span>
                                     </a> 
-                                </div>
-   
+                                     
+                             
 
 
 
+
+                                  
+
+
+                     {!! link_to(route('detail.edit',Sentinel::getUser()->id),'Edit Data') !!}
                     @endif
                     <!-- /.row -->
                 </div>
+               
                 <!-- /.container-fluid -->
             </div>
             <!-- /#page-wrapper -->

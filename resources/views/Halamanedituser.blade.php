@@ -136,8 +136,11 @@
                             <div class="panel-body">
                                 <div class="row">
                                     <div class="col-lg-6">
-                                   {!! Form::model($data,['route'=>['listuser.update',$data->id],'method'=>'put'],array('role'=>"form"))!!}
-
+                                    @if(Sentinel::getUser()->hasAccess('ubahuser'))
+                                  {!! Form::model($data,['route'=>['listuser.update',$data->id],'method'=>'put'],array('role'=>"form"))!!}
+                                    @else
+                                    {!! Form::model($data,['route'=>['detail.update',$data->id],'method'=>'put'],array('role'=>"form"))!!}
+                                    @endif
                                   <div class="form-group">
                                   {!! Form::label('jenis_kelamin', 'Masukan jenis kelamin:') !!}    
                                   <br>
