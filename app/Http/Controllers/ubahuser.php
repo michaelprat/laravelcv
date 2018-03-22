@@ -111,6 +111,8 @@ class ubahuser extends Controller
         User::destroy($id);//orm (objec relation model)
         $datacv=cv::select('id')->where('id_user', $id)->value('id'); //query builder
         DB::table('activations')->where("user_id",$id)->delete();
+        $hapuscv=cv::find($datacv);
+        unlink($hapuscv->detail);    
         cv::destroy($datacv);
         return redirect()->route("listuser.index");
     }
