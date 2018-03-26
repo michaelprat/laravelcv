@@ -16,3 +16,10 @@ use Illuminate\Http\Request;
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:api');
+
+Route::get('users','tampungapi@index');
+Route::get('user/{id}','tampungapi@show');
+Route::delete('user/{id}','tampungapi@destroy');
+Route::put('user','tampungapi@store');
+Route::post('user','tampungapi@store');
+

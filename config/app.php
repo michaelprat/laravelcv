@@ -140,6 +140,7 @@ return [
         /*
          * Laravel Framework Service Providers...
          */
+        EllipseSynergie\ApiResponse\Laravel\ResponseServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
         Laracasts\Flash\FlashServiceProvider::class,
