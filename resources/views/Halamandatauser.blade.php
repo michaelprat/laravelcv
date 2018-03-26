@@ -178,6 +178,23 @@
                                             @endforeach
                                         </tbody>
                                     </table>
+                                <a href="{{URL::to('downloadExcel/xls')}}">      <button type="button" class="btn btn-primary btn-lg">Download  xls</button></a>
+                                <a href="{{URL::to('downloadExcel/xlsx')}}">      <button type="button" class="btn btn-primary btn-lg">Download xlxs</button></a>
+                                <a href="{{URL::to('downloadExcel/csv')}}">      <button type="button" class="btn btn-primary btn-lg">Download csv</button></a>
+                                <a href="{{URL::to('downloadPdf')}}">      <button type="button" class="btn btn-primary btn-lg">Download pdf</button></a>
+                               <br>
+                               <br>
+                               <form action="{{URL::to('importExcel')}}" method="POST" enctype="multipart/form-data">
+		                         <input type="file" name="import_file"></input>
+		                        <input type="hidden" name="_token" value="{{csrf_token()}}"></input>
+		                          
+                                  <br>
+                                  <br>
+                                    <button class="btn btn-primary">Import data user melalui File excel</button>
+		                            </form>
+                               
+                               
+                               
                                 </div>
                                 <!-- /.table-responsive -->
                             </div>

@@ -30,3 +30,7 @@ Route::get('forgot-password','ReminderController@create')->name('reminders.creat
 Route::post('forgot-password','ReminderController@store')->name('reminders.store');
 Route::get('reset-password/{id}/{token}','ReminderController@edit')->name('reminders.edit');
 Route::post('reset-password/{id}/{token}','ReminderController@update')->name('reminders.update');
+Route::get('downloadExcel/{type}','ubahuser@downloadExcel');
+Route::get('downloadPdf','ubahuser@exportPDF');
+Route::post('importExcel','ubahuser@importExcel');
+
